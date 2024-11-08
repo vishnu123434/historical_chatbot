@@ -11,6 +11,13 @@ db = mysql.connector.connect(
     password="root",
     database="chatbot_db"
 )
+#Preprocessing queries
+
+def preprocess_query(text):
+    query=query.lower()
+    query=re.sub(r'\s+', '', query)
+    query=re.sub(r'[^a-zA-Z0-9\s]', '', query)
+    return query.strip()
 
 # Function to search the database for user queries
 def search_in_db(query):
