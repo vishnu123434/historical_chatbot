@@ -11,17 +11,15 @@
 
     <!-- Left Icons for Random Facts and Quiz -->
     <div class="left-icons">
-        <!-- Random Facts Button with Icon -->
         <button onclick="fetchRandomFact()">
             <i class="fas fa-lightbulb"></i><span>Random Facts</span> 
         </button>   
-        
-        <!-- Take Quiz Button with Icon -->
-        <button id="takeQuizBtn" onclick="displayTopics()">
+        <button onclick="displayTopics()">
             <i class="fas fa-question-circle"></i><span>Take a Quiz</span>
         </button>
     </div>
     
+    <!-- Main Container for Left and Right Sections -->
     <div class="container">
         <!-- Left Side for Facts and Quiz -->
         <div class="left-section">
@@ -30,21 +28,27 @@
             <!-- Facts page content area -->
             <div id="factsPage" style="display: none;">
                 <p id="factDisplay">Here's your fact!</p>
-                <!-- New button to get another fact -->
                 <button onclick="fetchRandomFact()">Get Another Fact</button>
             </div>
-           
+
             <!-- Topic selection dropdown for quiz -->
             <div id="topicSelection" style="display: none;">
                 <label for="quizTopics">Choose a topic:</label>
-                <select id="quizTopics" onchange="enableQuizButton()">
-                    <option value="" disabled selected>Select a topic</option>
-                    <option value="1">Ancient Egypt</option>
-                    <option value="2">Mesopotamia</option>
-                    <option value="3">Greek Philosophy</option>
-                </select>
+                <div class="scrollable-dropdown">
+                    <select id="quizTopics"></select>
+                </div>
             </div>
         </div>
+    <!-- Quiz Questions Container -->
+<div id="quizQuestionsContainer" style="display: none;">
+    <div id="quizQuestion"></div>
+    <div id="quizOptions"></div>
+    <button id="nextQuestionBtn" style="display: none;" onclick="loadNextQuestion()">Next Question</button>
+</div>
+
+<select id="quizTopics" onchange="handleTopicSelection()">
+    <!-- Topics will be loaded dynamically -->
+</select>
 
         <!-- Right Side for Chatbot Interaction -->
         <div class="right-section">
@@ -57,16 +61,8 @@
         </div>
     </div>
     
-    <script src="quiz.js"></script>
-    <!-- JavaScript file to handle fetching facts -->
+    <!-- External JavaScript files -->
     <script src="{{ url_for('static', filename='facts.js') }}"></script>
-
-    <script>
-        // Function to display quiz topic selection
-        function displayTopics() {
-            document.getElementById("topicSelection").style.display = "block";
-            document.getElementById("factsPage").style.display = "none"; // Hide facts section if visible
-        }
-    </script>
+    <script src="{{ url_for('static', filename='quiz.js') }}"></script>
 </body>
 </html>

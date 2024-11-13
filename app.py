@@ -49,5 +49,21 @@ def get_quiz_topics():
     return jsonify(topics)
 
 
+@app.route('/api/quiz_questions/<int:topic_id>', methods=['GET'])
+def get_quiz_questions(topic_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Fetch questions for the selected topic
+    cursor.execute("SELECT question_text, option_a, option_b, option_c, option_d, correct_answer FROM quiz_questions WHERE topic_id = %s", (topic_id,))
+    quiz_questions = cursor.fetchall()
+    
+    # Close the connection
+    cursor.close()
+    conn.close()
+    
+    # Return the questions as JSON
+    return jsonify(quiz_questions)
+
 if __name__ == '__main__':
     app.run(debug=True)
