@@ -3,26 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chatbot</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Historical Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to the Historical Chatbot</h1>
-        <button id="giveFactBtn">Give a Fact</button>
-        <button id="takeQuizBtn">Take a Quiz</button>
-        
-        <div id="factArea"></div>
-        <div id="quizArea"></div>
 
-        <div id="chatSection">
-            <input type="text" id="userInput" placeholder="Ask anything...">
-            <button id="sendBtn">Send</button>
-            <div id="chatbotResponse"></div>
+    <!-- Left Icons for Random Facts and Quiz -->
+    <div class="left-icons">
+        <!-- Random Facts Button with Icon -->
+        <button onclick="fetchRandomFact()">
+            <i class="fas fa-lightbulb"></i><span>Random Facts</span> 
+        </button>   
+        
+        <!-- Take Quiz Button with Icon -->
+        <button id="takeQuizBtn" onclick="displayTopics()">
+            <i class="fas fa-question-circle"></i><span>Take a Quiz</span>
+        </button>
+    </div>
+    
+    <div class="container">
+        <!-- Left Side for Facts and Quiz -->
+        <div class="left-section">
+            <h1>Facts and Quiz</h1>
+            
+            <!-- Facts page content area -->
+            <div id="factsPage" style="display: none;">
+                <p id="factDisplay">Here's your fact!</p>
+                <!-- New button to get another fact -->
+                <button onclick="fetchRandomFact()">Get Another Fact</button>
+            </div>
+           
+            <!-- Topic selection dropdown for quiz -->
+            <div id="topicSelection" style="display: none;">
+                <label for="quizTopics">Choose a topic:</label>
+                <select id="quizTopics" onchange="enableQuizButton()">
+                    <option value="" disabled selected>Select a topic</option>
+                    <option value="1">Ancient Egypt</option>
+                    <option value="2">Mesopotamia</option>
+                    <option value="3">Greek Philosophy</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Right Side for Chatbot Interaction -->
+        <div class="right-section">
+            <h1>Chatbot Interaction</h1>
+            <div id="chatbotArea">
+                <!-- Chatbot messages will appear here -->
+            </div>
+            <input type="text" id="userInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
         </div>
     </div>
+    
+    <script src="quiz.js"></script>
+    <!-- JavaScript file to handle fetching facts -->
+    <script src="{{ url_for('static', filename='facts.js') }}"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Function to display quiz topic selection
+        function displayTopics() {
+            document.getElementById("topicSelection").style.display = "block";
+            document.getElementById("factsPage").style.display = "none"; // Hide facts section if visible
+        }
+    </script>
 </body>
 </html>

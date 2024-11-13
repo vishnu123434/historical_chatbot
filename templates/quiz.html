@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <header>
+        <h1>Take a Quiz</h1>
+    </header>
+    
+    <main>
+        <!-- Dropdown to select a quiz topic -->
+        <label for="quizTopics">Choose a topic:</label>
+        <select id="quizTopics" onchange="loadQuiz()">
+            <option value="" disabled selected>Select a topic</option>
+            <option value="1">Ancient Egypt</option>
+            <option value="2">Mesopotamia</option>
+            <option value="3">Greek Philosophy</option>
+            <!-- Add more topics as needed -->
+        </select>
+
+        <!-- Quiz question and options -->
+        <div id="quizSection" style="display: none;">
+            <h2 id="question"></h2>
+            <div id="options">
+                <!-- Options will be populated here dynamically -->
+            </div>
+            <p id="feedback"></p>
+        </div>
+
+        <!-- Button to return to main page -->
+        <button onclick="window.location.href='index.html'">Back to Home</button>
+    </main>
+
+    <script src="quiz.js"></script>"></script> <!-- Script to manage quiz flow and check answers -->
+</body>
+</html>

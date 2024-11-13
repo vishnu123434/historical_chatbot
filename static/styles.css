@@ -1,0 +1,136 @@
+/* Container to hold both sections side by side */
+.container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+}
+
+.left-section, .right-section {
+    flex: 1; /* Equal width for both sections */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Styling for left section */
+.left-section {
+    background-color: #FFD700; /* Golden color */
+    border-right: 2px solid #333; /* Divider between sections */
+}
+
+/* Styling for right section */
+.right-section {
+    background-color: #f4f4f4; /* Light background for chatbot section */
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    text-align: center;
+}
+
+#chatbotArea {
+    flex: 1; /* Takes available space */
+    border: 1px solid #333;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+#userInput {
+    width: 80%;
+    padding: 8px;
+}
+
+button {
+    margin: 5px 0;
+    padding: 10px;
+}
+.left-icons {
+    position: fixed;   /* Fixed to keep in corner as you scroll */
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.left-icons button {
+    background-color: #FFD700; /* Golden color */
+    border: none;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;   /* Space between icon and text */
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+    /* Hide the text on small screens, keeping only the icon visible */
+    .left-icons button span {
+        display: none; /* Hide the text (span) inside the button */
+    }
+
+    /* Optionally, reduce the size of the icons or adjust button size */
+    .left-icons button {
+        padding: 10px; /* Adjust padding if needed for smaller screens */
+    }
+}
+
+
+.left-icons button:hover {
+    background-color: #e6c200; /* Darker shade on hover */
+}
+
+.left-icons i {
+    font-size: 20px; /* Icon size */
+}
+
+
+.left-section {
+    padding: 20px;
+    background-color: #FFD700;
+}
+
+
+
+#factsPage button {
+    margin-top: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#factsPage button:hover {
+    background-color: #555;
+}
+/* CSS for the Facts Display Box */
+#factsPage {
+    display: none; /* Initially hidden */
+    margin-top: 60px; /* Adds space between the box and the icons */
+    background-color: #f9f9f9; /* Light background color for contrast */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Adjust width as needed */
+}
+/* CSS for the Quiz Topic Selection Box */
+#topicSelection {
+    display: none; /* Initially hidden */
+    margin-top: 60px; /* Adds space between the box and the icons */
+    background-color: #f9f9f9; /* Light background color for contrast */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Adjust width as needed */
+}
+
