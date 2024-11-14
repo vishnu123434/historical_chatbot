@@ -39,4 +39,3 @@ function loadQuizQuestions(topicId) {
         .catch(error => console.error('Error fetching quiz questions:', error));
 }
 
-
