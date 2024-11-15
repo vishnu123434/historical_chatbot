@@ -1,65 +1,59 @@
-/* Container to hold both sections side by side */
-.container {
+
+/* Global font settings */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2 {
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  /* Styling for the layout */
+  .container {
     display: flex;
     height: 100vh;
-    gap: 20px; /* Optional gap between sections */
-}
-
-body {
-    overflow: hidden;
-}
-
-.left-section, .right-section {
-    flex: 1;
+  }
+  
+  .left-side {
+    width: 50%;
+    background-color: #f5f5dc;
     padding: 20px;
     box-sizing: border-box;
-}
-
-/* Styling for left section */
-.left-section {
-    background-color: #FFD700;
-    border-right: 2px solid #333;
-}
-
-/* Styling for right section */
-.right-section {
-    background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column;
-}
-
-h1 {
-    text-align: center;
-}
-
-#chatbotArea {
-    flex: 1;
-    border: 1px solid #333;
-    padding: 10px;
-    margin-bottom: 10px;
     overflow-y: auto;
-}
-
-#userInput {
-    width: 80%;
-    padding: 8px;
-}
-
-button {
-    margin: 5px 0;
-    padding: 10px;
-}
-
-.left-icons {
-    position: fixed;
-    top: 20px;
-    left: 20px;
+    max-height: 100vh;
+  }
+  
+  .right-side {
+    width: 50%;
+    background-color: #f0e68c;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Button Styling */
+  button {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .left-icons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
-}
-
-.left-icons button {
+    margin-top: 10px;
+  }
+  
+  .left-icons button {
     background-color: #FFD700;
     border: none;
     padding: 10px 15px;
@@ -71,76 +65,59 @@ button {
     gap: 8px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Media query for smaller screens */
-@media screen and (max-width: 768px) {
-    .left-icons button span {
-        display: none;
-    }
-    .left-icons button {
-        padding: 10px;
-    }
-}
-
-.left-icons button:hover {
+  }
+  
+  .left-icons button:hover {
     background-color: #e6c200;
-}
-
-.left-icons i {
+  }
+  
+  .left-icons i {
     font-size: 20px;
-}
-
-/* Styling for Facts and Quiz Sections */
-/* Facts Page container */
-#factsPage {
-    display: none;
-    margin-top: 80px; /* Increase margin to push down */
-    background-color: #f9f9f9;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    width: 80%; /* Adjust width as needed */
-}
-
-#factsPage button {
-    margin-top: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-#factsPage button:hover {
-    background-color: #555;
-}
-
-/* Styling for the Quiz Topic Selection Box */
-#topicSelection {
-    display: none;
-    margin-top: 80px; /* Increase margin to push down */
-    background-color: #f9f9f9;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-height: 400px; /* Limit height for scrollable area */
-    overflow-y: auto; /* Enable vertical scrolling */
-}
-
-.scrollable-dropdown {
-    max-height: 150px;
-    overflow-y: auto;
-}
-
-.scrollable-dropdown select {
+  }
+  
+  /* Quiz Styling */
+  .quiz-container {
     width: 100%;
-    padding: 5px;
-    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  .quiz-question {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    border: 1px solid #ddd;
-}
+    background-color: #fff;
+  }
+  
+  .quiz-options {
+    margin-top: 10px;
+  }
+  
+  .quiz-option {
+    display: block;
+    margin: 5px 0;
+  }
+  
+  #answer {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .correct {
+    color: green;
+  }
+  
+  .incorrect {
+    color: red;
+  }
+  
+  /* Styling for random facts container */
+  .fact-container {
+    border: 2px solid #ccc;
+    padding: 20px;
+    background-color: white;
+    margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 5px;
+  }

@@ -2,22 +2,45 @@ from flask import Flask, render_template, jsonify
 import mysql.connector
 import random
 
+# Specify the template folder here
 app = Flask(__name__)
 
-# Database connection function
+# Connect to the database
 def get_db_connection():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="history_db"
+    connection = mysql.connector.connect(
+        host="localhost",        # Database host
+        user="root",    # Your MySQL username
+        password="root", # Your MySQL password
+        database="history_db"    # The name of your database
     )
+    return connection
 
-
-# Home route serving the main page
+# Define the route for the homepage
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html')  # Ensure 'index.html' is in the templates folder
+
+# Define the route to get quiz topics
+@app.route('/get_quiz_topics', methods=['GET'])
+def get_quiz_topics():
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute('SELECT topic_id, topic_name FROM quiz_topics')
+    topics = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    return jsonify(topics)
+
+# Define the route for getting quiz questions from MySQL
+@app.route('/get_quiz_questions/<topic_name>', methods=['GET'])
+def get_quiz_questions(topic_name):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute('SELECT * FROM quiz_questions WHERE topic_name = %s', (topic_name,))
+    questions = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    return jsonify(questions)
 
 # API route to fetch a random fact
 @app.route('/api/random_fact', methods=['GET'])
@@ -37,33 +60,6 @@ def get_random_fact():
     return jsonify({"fact": random_fact})
 
 
-# Route to fetch quiz topics
-@app.route('/api/quiz_topics')
-def get_quiz_topics():
-    db = get_db_connection()
-    cursor = db.cursor()
-    cursor.execute("SELECT topic_id, topic_name FROM quiz_topics")  # Assuming `topic_id` and `topic_name` columns
-    topics = cursor.fetchall()
-    cursor.close()
-    db.close()
-    return jsonify(topics)
+if __name__ == "__main__":
+    app.run(debug=True, port=5001)
 
-
-@app.route('/api/quiz_questions/<int:topic_id>', methods=['GET'])
-def get_quiz_questions(topic_id):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    
-    # Fetch questions for the selected topic
-    cursor.execute("SELECT question_text, option_a, option_b, option_c, option_d, correct_answer FROM quiz_questions WHERE topic_id = %s", (topic_id,))
-    quiz_questions = cursor.fetchall()
-    
-    # Close the connection
-    cursor.close()
-    conn.close()
-    
-    # Return the questions as JSON
-    return jsonify(quiz_questions)
-
-if __name__ == '__main__':
-    app.run(debug=True)
