@@ -22,13 +22,34 @@
   </div>
 
   <div class="right-side" id="right-side">
-    <h2>Chatbot Interaction Area</h2>
-    <p>This area is for interacting with the chatbot.</p>
+    <div id="chatbot-container">
+      <!-- Chatbot Header -->
+    <div id="chatbot-header">
+      <img src="{{ url_for('static', filename='chat-bot.gif') }}" alt="Chatbot Icon" id="chatbot-icon">
+      <span id="chatbot-name">Vyasa</span>
   </div>
+      <div id="chat-display">
+        <!-- Chat messages will appear here -->
+         <!-- Chatbot's initial introduction will go here -->
+        <div class="bot-message">
+          <img src="/static/chat.png" alt="Chatbot Icon" class="bot-icon">
+          <strong>Vyasa:</strong> Hello, I'm your friendly chatbot! How can I assist you today?
+      </div>
+      </div>
+      <div id="chat-input">
+        <input type="text" id="user-input" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+    
+  </div>
+
+  
 </div>
 
 <script src="{{ url_for('static', filename='quiz.js') }}"></script>
 <script src="{{ url_for('static', filename='facts.js') }}"></script>
+<script src="{{ url_for('static', filename='chatbot.js') }}"></script>
 
 </body>
 </html>

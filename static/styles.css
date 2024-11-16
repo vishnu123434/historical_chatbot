@@ -28,7 +28,7 @@ body {
   
   .right-side {
     width: 50%;
-    background-color: #f0e68c;
+    background-color: #eed916;
     padding: 20px;
     box-sizing: border-box;
   }
@@ -120,4 +120,133 @@ body {
     max-height: 300px;
     overflow-y: auto;
     border-radius: 5px;
+    display: none;
   }
+
+
+
+  /* Left Section */
+  /* Chatbot container */
+/* Chatbot container */
+#chatbot-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 600px; /* Reduced height */
+  width: 650px; /* Adjusted width */
+  border: 5px solid white;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  position: absolute; /* Allows positioning relative to the parent */
+  /* top: 20px;  Moves the container upwards   */
+  bottom: 20px;
+  right: 70px; /* Aligns it to the right side */
+  overflow: hidden; /* Prevents internal scrolling */
+  z-index: 10; /* Ensures it stays above other elements */
+}
+
+/* Chat display area */
+#chat-display {
+  flex-grow: 1;
+  overflow-y: auto; /* Allows vertical scrolling within the chat area */
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  max-height: 300px; /* Restricts height of the chat display */
+}
+
+/* Chat input area */
+#chat-input {
+  display: flex;
+  margin-top: 10px;
+}
+
+#chat-input input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid rgb(155, 141, 141);
+  border-radius: 5px 0 0 5px;
+  font-size: 14px;
+}
+
+#chat-input button {
+  padding: 8px 15px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+}
+
+#chat-input button:hover {
+  background-color: #45a049;
+}
+
+/* Chatbot header */
+#chatbot-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Optional: separates header from chat display */
+  background-color: #f5f5f5; /* Optional: light background for header */
+  border-radius: 5px 5px 0 0; /* Match container's top corners */
+}
+
+/* Chatbot icon */
+#chatbot-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+/* Chatbot name */
+#chatbot-name {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Bot message styling */
+.bot-message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+/* Bot icon styling */
+.bot-icon {
+  width: 30px; /* Set the size of the bot's icon */
+  height: 30px;
+  margin-right: 10px;  /* Space between icon and name */
+}
+
+/* User message styling */
+.user-message {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #d3f8e2;
+  border-radius: 5px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+
+/* Remove scrollbar on the entire webpage */
+body {
+  overflow: hidden; /* Prevents scrolling on the entire page */
+  margin: 0; /* Removes any extra margin */
+  padding: 10px; /* Removes any extra padding */
+}
+
+
