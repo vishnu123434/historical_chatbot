@@ -29,16 +29,13 @@
       <span id="chatbot-name">Vyasa</span>
   </div>
       <div id="chat-display">
+       
         <!-- Chat messages will appear here -->
-         <!-- Chatbot's initial introduction will go here -->
-        <div class="bot-message">
-          <img src="/static/chat.png" alt="Chatbot Icon" class="bot-icon">
-          <strong>Vyasa:</strong> Hello, I'm your friendly chatbot! How can I assist you today?
       </div>
-      </div>
+    
       <div id="chat-input">
         <input type="text" id="user-input" placeholder="Type your message..." />
-        <button onclick="sendMessage()">Send</button>
+        <button id="send-btn">Send</button>
       </div>
     </div>
     
@@ -46,7 +43,10 @@
 
   
 </div>
-
+<script>
+  // Assign the bot icon URL to a JavaScript variable
+  const botIconUrl = "{{ url_for('static', filename='chat.png') }}";
+</script>
 <script src="{{ url_for('static', filename='quiz.js') }}"></script>
 <script src="{{ url_for('static', filename='facts.js') }}"></script>
 <script src="{{ url_for('static', filename='chatbot.js') }}"></script>

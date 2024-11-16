@@ -5,11 +5,11 @@ document.getElementById("send-btn").addEventListener("click", function() {
         addMessageToChat('user', userInput);
         document.getElementById("user-input").value = "";  // Clear the input field
 
-        // Simulate bot's reply with its name and icon
+        // Simulate bot's reply with its name, icon, and message
         setTimeout(function() {
-            let botReply = getBotReply(userInput);  // You can implement a function for more complex responses
+            let botReply = getBotReply(userInput);  // Function for bot response
             addMessageToChat('bot', botReply);
-        }, 1000);  // Simulating a slight delay in bot's reply
+        }, 1000);  // Simulate slight delay
     }
 });
 
@@ -18,14 +18,14 @@ function addMessageToChat(sender, message) {
     const chatDisplay = document.getElementById("chat-display");
     const messageElement = document.createElement("div");
 
-    // Format message based on sender (user or bot)
+    // Format message based on sender
     if (sender === 'user') {
         messageElement.innerHTML = `<div class="user-message"><strong>You:</strong> ${message}</div>`;
     } else {
         messageElement.innerHTML = `
             <div class="bot-message">
-                <img src="/static/chatbot-icon.png" alt="Chatbot Icon" class="bot-icon">
-                <strong>ChatBot:</strong> ${message}
+                <img src="${botIconUrl}" class="bot-icon" alt="Bot Icon" />
+                <strong>Vyasa:</strong> ${message}
             </div>
         `;
     }
@@ -37,7 +37,6 @@ function addMessageToChat(sender, message) {
 // Function to simulate bot's response based on user input
 function getBotReply(input) {
     // Customize the bot's response based on user input
-    // This is a simple placeholder; you can replace it with your own logic
     if (input.toLowerCase().includes("hello")) {
         return "Hello! How can I assist you today?";
     } else {

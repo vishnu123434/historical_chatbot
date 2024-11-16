@@ -28,7 +28,7 @@ body {
   
   .right-side {
     width: 50%;
-    background-color: #eed916;
+    background-color: #d4cc84;
     padding: 20px;
     box-sizing: border-box;
   }
@@ -128,7 +128,7 @@ body {
   /* Left Section */
   /* Chatbot container */
 /* Chatbot container */
-#chatbot-container {
+  #chatbot-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -145,19 +145,21 @@ body {
   right: 70px; /* Aligns it to the right side */
   overflow: hidden; /* Prevents internal scrolling */
   z-index: 10; /* Ensures it stays above other elements */
-}
+} 
 
 /* Chat display area */
 #chat-display {
   flex-grow: 1;
-  overflow-y: auto; /* Allows vertical scrolling within the chat area */
+  overflow-y: auto;
   padding: 10px;
   font-family: Arial, sans-serif;
   font-size: 14px;
   color: #333;
-  max-height: 300px; /* Restricts height of the chat display */
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Ensures consistent space between each message */
 }
-
 /* Chat input area */
 #chat-input {
   display: flex;
@@ -212,26 +214,18 @@ body {
   color: #333;
 }
 
-/* Bot message styling */
-.bot-message {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  padding: 10px;
-  background-color: #f1f1f1;
-  border-radius: 5px;
-}
-
 /* Bot icon styling */
 .bot-icon {
-  width: 30px; /* Set the size of the bot's icon */
+  width: 30px;
   height: 30px;
-  margin-right: 10px;  /* Space between icon and name */
+  margin-right: 10px;
+  vertical-align: middle;
 }
+
 
 /* User message styling */
 .user-message {
-  margin-bottom: 15px;
+  margin-bottom: 0;  /* Remove bottom margin to avoid excessive gap */
   padding: 10px;
   background-color: #d3f8e2;
   border-radius: 5px;
