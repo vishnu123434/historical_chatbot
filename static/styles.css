@@ -28,7 +28,7 @@ body {
   
   .right-side {
     width: 50%;
-    background-color: #d4cc84;
+    background-color: #eed916;
     padding: 20px;
     box-sizing: border-box;
   }
@@ -216,12 +216,13 @@ body {
 
 /* Bot icon styling */
 .bot-icon {
-  width: 30px;
+  width: 30px; /* Set the size of the bot's icon */
   height: 30px;
-  margin-right: 10px;
+  margin-right: 5px;  /* Space between icon and name */
+  position: relative;
+  top:2px;
   vertical-align: middle;
 }
-
 
 /* User message styling */
 .user-message {

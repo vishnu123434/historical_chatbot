@@ -38,7 +38,7 @@ function addMessageToChat(sender, message) {
 function getBotReply(input) {
     // Customize the bot's response based on user input
     if (input.toLowerCase().includes("hello")) {
-        return "Hello! How can I assist you today?";
+        return "Hello! I'm Vyasa, your companion for a journey through history. Ask me anything or let me surprise you with a fun fact!";
     } else {
         return "Sorry, I didn't quite understand that. Could you ask something else?";
     }
