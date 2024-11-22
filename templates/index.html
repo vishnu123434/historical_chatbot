@@ -6,42 +6,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
   <title>Quiz Example</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-  <title>Quiz Example</title>
 </head>
 <body>
-
-<div class="container">
-  <div class="left-side" id="left-side">
-    <h2>Facts & Quiz </h2>
-    <div class="left-icons">
-      <button onclick="loadQuizTopics()"><i class="fas fa-list-alt"></i><span>Take A Quiz</span></button> 
-      <button onclick="loadRandomFact()"><i class="fas fa-lightbulb"></i><span>Random Facts</span></button> 
-    </div>
-
-    <div id="content-area"></div>
-    <div id="fact-container" class="fact-container"></div> <!-- Container for random fact -->
-  </div>
-
-  <div class="right-side" id="right-side">
-    <div id="chatbot-container">
-      <!-- Chatbot Header -->
-    <div id="chatbot-header">
-      <img src="{{ url_for('static', filename='chat-bot.gif') }}" alt="Chatbot Icon" id="chatbot-icon">
-      <span id="chatbot-name">Vyasa</span>
-  </div>
-      <div id="chat-display">
-       
-        <!-- Chat messages will appear here -->
-      </div>
-    
-      <div id="chat-input">
-        <input type="text" id="user-input" placeholder="Type your message..." />
-        <button id="send-btn">Send</button>
-      </div>
 
 <div class="container">
   <div class="left-side" id="left-side">
@@ -72,19 +38,6 @@
         <button id="send-btn">Send</button>
       </div>
     </div>
-    
-  </div>
-
-  
-</div>
-<script>
-  // Assign the bot icon URL to a JavaScript variable
-  const botIconUrl = "{{ url_for('static', filename='chat.png') }}";
-</script>
-<script src="{{ url_for('static', filename='quiz.js') }}"></script>
-<script src="{{ url_for('static', filename='facts.js') }}"></script>
-<script src="{{ url_for('static', filename='chatbot.js') }}"></script>
-
     
   </div>
 
