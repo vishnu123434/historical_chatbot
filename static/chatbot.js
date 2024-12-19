@@ -1,45 +1,74 @@
-document.getElementById("send-btn").addEventListener("click", function() {
-    let userInput = document.getElementById("user-input").value;
+// Common function to handle sending a message
+async function handleUserInput() {
+    const userInputField = document.getElementById("user-input");
+    const userInput = userInputField.value.trim();
+
     if (userInput) {
-        // Add user's message to the chat display
+        // Clear the input field immediately
+        userInputField.value = "";
+
+        // Add the user's message to the chat display
         addMessageToChat('user', userInput);
-        document.getElementById("user-input").value = "";  // Clear the input field
 
-        // Simulate bot's reply with its name, icon, and message
-        setTimeout(function() {
-            let botReply = getBotReply(userInput);  // Function for bot response
+        try {
+            // Fetch the bot's reply from the backend
+            const botReply = await getBotReply(userInput);
             addMessageToChat('bot', botReply);
-        }, 1000);  // Simulate slight delay
+        } catch (error) {
+            addMessageToChat('bot', "Sorry, I couldn't process your request.");
+            console.error("Error fetching bot reply:", error);
+        }
     }
-});
+}
 
-// Function to add message to chat
+// Function to add messages to the chat display
 function addMessageToChat(sender, message) {
     const chatDisplay = document.getElementById("chat-display");
     const messageElement = document.createElement("div");
 
-    // Format message based on sender
     if (sender === 'user') {
-        messageElement.innerHTML = `<div class="user-message"><strong>You:</strong> ${message}</div>`;
-    } else {
+        // User's message layout
+        messageElement.classList.add("message", "user-message");
+        messageElement.innerHTML = `<strong>You:</strong> ${message}`;
+    } else if (sender === 'bot') {
+        // Bot's message layout
+        messageElement.classList.add("message", "bot-message");
         messageElement.innerHTML = `
-            <div class="bot-message">
-                <img src="${botIconUrl}" class="bot-icon" alt="Bot Icon" />
-                <strong>Vyasa:</strong> ${message}
-            </div>
+            <strong>Vyasa:</strong> 
+            <span class="bot-reply">${message}</span>
         `;
     }
 
+    // Append the message and auto-scroll
     chatDisplay.appendChild(messageElement);
-    chatDisplay.scrollTop = chatDisplay.scrollHeight;  // Auto scroll to the bottom
+    chatDisplay.scrollTop = chatDisplay.scrollHeight;
 }
 
-// Function to simulate bot's response based on user input
-function getBotReply(input) {
-    // Customize the bot's response based on user input
-    if (input.toLowerCase().includes("hello")) {
-        return "Hello! I'm Vyasa, your companion for a journey through history. Ask me anything or let me surprise you with a fun fact!";
+// Function to fetch the bot's response from the backend
+async function getBotReply(input) {
+    const response = await fetch("/chatbot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: input }),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        return data.results?.[0]?.chunk || "I couldn't find any information related to your query.";
     } else {
-        return "Sorry, I didn't quite understand that. Could you ask something else?";
+        throw new Error("Failed to fetch response from the backend.");
     }
 }
+
+// Event listener for the "Send" button
+document.getElementById("send-btn").addEventListener("click", async function () {
+    await handleUserInput();
+});
+
+// Event listener for "Enter" or "Space" key press
+document.getElementById("user-input").addEventListener("keydown", async function (event) {
+    if (event.key === 'Enter' || event.key === ' ') {  // 'Enter' or 'Space' key
+        event.preventDefault(); // Prevent default behavior (such as form submission)
+        await handleUserInput();
+    }
+});

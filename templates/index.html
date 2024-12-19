@@ -11,9 +11,9 @@
 
 <div class="container">
   <div class="left-side" id="left-side">
-    <h2>Facts & Quiz </h2>
+    <h2>Facts & Quiz</h2>
     <div class="left-icons">
-      <button onclick="loadQuizTopics()"><i class="fas fa-list-alt"></i><span>Take A Quiz</span></button> 
+      <button onclick="loadQuizTopics()"><i class="fas fa-list-alt"></i><span>Select Topic</span></button> 
       <button onclick="loadRandomFact()"><i class="fas fa-lightbulb"></i><span>Random Facts</span></button> 
     </div>
 
@@ -24,32 +24,85 @@
   <div class="right-side" id="right-side">
     <div id="chatbot-container">
       <!-- Chatbot Header -->
-    <div id="chatbot-header">
-      <img src="{{ url_for('static', filename='chat-bot.gif') }}" alt="Chatbot Icon" id="chatbot-icon">
-      <span id="chatbot-name">Vyasa</span>
-  </div>
+      <div id="chatbot-header">
+        <img src="{{ url_for('static', filename='chat-bot.gif') }}" alt="Chatbot Icon" id="chatbot-icon">
+        <span id="chatbot-name">Vyasa</span>
+      </div>
       <div id="chat-display">
-       
         <!-- Chat messages will appear here -->
       </div>
-    
+
       <div id="chat-input">
         <input type="text" id="user-input" placeholder="Type your message..." />
         <button id="send-btn">Send</button>
       </div>
     </div>
-    
   </div>
-
-  
 </div>
+
 <script>
+  
   // Assign the bot icon URL to a JavaScript variable
   const botIconUrl = "{{ url_for('static', filename='chat.png') }}";
+
+  document.getElementById("send-btn").addEventListener("click", getChatResponse);
+
+  function getChatResponse() {
+    const userInput = document.getElementById("user-input").value;
+    if (!userInput.trim()) {
+      alert("Please ask a valid question.");
+      return;
+    }
+
+    const responseDiv = document.getElementById("chat-display");
+    responseDiv.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`; // Display user input
+
+    // Fetch bot response from backend
+    fetch('/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user_input: userInput }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      const formattedResponse = formatResponse(data.response);
+      displayTypingEffect(formattedResponse); // Directly display word-by-word response
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      responseDiv.innerHTML += `<p><strong>Bot:</strong> Sorry, something went wrong!</p>`;
+    });
+  }
+
+  function formatResponse(text) {
+    // Clean up response text, remove extra spaces and ensure it's formatted well
+    return text.replace(/([.,!?])/g, "$1 ").replace(/\s+/g, " ").trim();
+  }
+
+  // Simulate typing effect, word by word
+  function displayTypingEffect(text) {
+    const responseDiv = document.getElementById("chat-display");
+    const words = text.split(' '); // Split response into words
+    let wordIndex = 0;
+
+    // Display "Bot:" first, and then append words one by one beside it
+    responseDiv.innerHTML += `<p><strong>Bot:</strong>`;
+
+    const intervalId = setInterval(function() {
+      if (wordIndex < words.length) {
+        responseDiv.innerHTML += ` ${words[wordIndex]}`; // Append words directly after "Bot:"
+        wordIndex++;
+      } else {
+        clearInterval(intervalId);
+      }
+    }, 100); // Adjust speed by changing this delay (100ms per word)
+  }
 </script>
+
 <script src="{{ url_for('static', filename='quiz.js') }}"></script>
 <script src="{{ url_for('static', filename='facts.js') }}"></script>
-<script src="{{ url_for('static', filename='chatbot.js') }}"></script>
 
 </body>
 </html>
